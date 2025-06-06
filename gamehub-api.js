@@ -2,7 +2,7 @@
 // This file should be included in your HTML page
 
 class GameHubAPI {
-    constructor(baseURL = 'http://localhost:3000/api') {
+    constructor(baseURL = 'https://gamebackend-tlrm.onrender.com') {
         this.baseURL = baseURL;
         this.token = localStorage.getItem('gameHubToken');
     }
