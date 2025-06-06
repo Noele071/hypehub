@@ -1,0 +1,1698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameHub - Play, Compete, Lead</title>
+    <style>
+        * * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+    color: #f8fafc;
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px;
+}
+
+/* Header Styles */
+.header {
+    text-align: center;
+    margin-bottom: 32px;
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(148, 163, 184, 0.1);
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: none;
+}
+
+.header p {
+    color: #94a3b8;
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+
+/* Authentication Section */
+.auth-section {
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(148, 163, 184, 0.1);
+    border-radius: 16px;
+    padding: 40px;
+    text-align: center;
+    margin-bottom: 32px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.auth-tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 32px;
+    gap: 4px;
+    background: rgba(30, 41, 59, 0.5);
+    padding: 4px;
+    border-radius: 12px;
+    border: 1px solid rgba(148, 163, 184, 0.1);
+}
+
+.tab-btn {
+    background: transparent;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    color: #94a3b8;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex: 1;
+}
+
+.tab-btn.active {
+    background: #3b82f6;
+    color: #ffffff;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.auth-form {
+    display: none;
+}
+
+.auth-form.active {
+    display: block;
+}
+
+.auth-form h2 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #f8fafc;
+}
+
+.auth-form p {
+    color: #94a3b8;
+    margin-bottom: 24px;
+}
+
+/* Button Styles */
+.btn {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin: 8px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.5);
+}
+
+.btn:hover {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Input Field Styles */
+.input-field {
+    width: 100%;
+    max-width: 400px;
+    padding: 12px 16px;
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    border-radius: 8px;
+    margin: 8px;
+    font-size: 14px;
+    background: rgba(30, 41, 59, 0.5);
+    color: #f8fafc;
+    transition: all 0.2s ease;
+}
+
+.input-field::placeholder {
+    color: #64748b;
+}
+
+.input-field:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    background: rgba(30, 41, 59, 0.8);
+}
+
+/* Message Styles */
+.error-message {
+    color: #f87171;
+    background: rgba(248, 113, 113, 0.1);
+    border: 1px solid rgba(248, 113, 113, 0.2);
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin: 12px 0;
+    display: none;
+    font-size: 14px;
+}
+
+.success-message {
+    color: #34d399;
+    background: rgba(52, 211, 153, 0.1);
+    border: 1px solid rgba(52, 211, 153, 0.2);
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin: 12px 0;
+    display: none;
+    font-size: 14px;
+}
+
+/* User Profile */
+.user-profile {
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(148, 163, 184, 0.1);
+    padding: 24px;
+    border-radius: 16px;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.profile-pic {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    margin: 0 auto 16px;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Game Selection */
+.game-selection {
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(148, 163, 184, 0.1);
+    border-radius: 16px;
+    padding: 40px;
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.game-selection h2 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #f8fafc;
+}
+
+.game-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin-top: 32px;
+}
+
+.game-option {
+    background: rgba(30, 41, 59, 0.4);
+    border: 1px solid rgba(148, 163, 184, 0.1);
+    border-radius: 12px;
+    padding: 32px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.game-option:hover {
+    background: rgba(30, 41, 59, 0.6);
+    transform: translateY(-4px);
+    border-color: rgba(59, 130, 246, 0.3);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.game-option h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #f8fafc;
+}
+
+.game-option p {
+    color: #94a3b8;
+    margin-bottom: 8px;
+}
+
+/* Game Section */
+.game-section {
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(148, 163, 184, 0.1);
+    border-radius: 16px;
+    padding: 24px;
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.main-content {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 24px;
+    margin-top: 24px;
+}
+
+.game-container {
+    margin-top: 24px;
+}
+
+.game-board {
+    margin: 0 auto;
+    border-radius: 12px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(148, 163, 184, 0.1);
+}
+
+/* 2048 Styles */
+.board-2048 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    background: #1e293b;
+    padding: 16px;
+    border-radius: 12px;
+    width: 300px;
+    height: 300px;
+    border: 1px solid rgba(148, 163, 184, 0.1);
+}
+
+.tile-2048 {
+    background: #334155;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 600;
+    color: #64748b;
+    transition: all 0.15s ease-in-out;
+    border: 1px solid rgba(148, 163, 184, 0.1);
+}
+
+.tile-2048.tile-2 { background: #475569; color: #f8fafc; }
+.tile-2048.tile-4 { background: #64748b; color: #f8fafc; }
+.tile-2048.tile-8 { background: #f59e0b; color: #ffffff; }
+.tile-2048.tile-16 { background: #f97316; color: #ffffff; }
+.tile-2048.tile-32 { background: #ef4444; color: #ffffff; }
+.tile-2048.tile-64 { background: #dc2626; color: #ffffff; }
+
+/* Tetris Styles */
+.board-tetris {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 1px;
+    background: #0f172a;
+    padding: 16px;
+    border-radius: 12px;
+    width: 260px;
+    height: 520px;
+    border: 1px solid rgba(148, 163, 184, 0.1);
+}
+
+.tetris-cell {
+    width: 20px;
+    height: 20px;
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 2px;
+}
+
+.tetris-cell.filled {
+    border: 1px solid rgba(148, 163, 184, 0.3);
+    box-shadow: inset 0 0 4px rgba(255, 255, 255, 0.1);
+}
+
+/* Leaderboard */
+.leaderboard {
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(148, 163, 184, 0.1);
+    border-radius: 16px;
+    padding: 24px;
+}
+
+.leaderboard h3 {
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #f8fafc;
+}
+
+.leaderboard-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    margin: 8px 0;
+    background: rgba(30, 41, 59, 0.4);
+    border: 1px solid rgba(148, 163, 184, 0.1);
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.leaderboard-item:hover {
+    background: rgba(30, 41, 59, 0.6);
+    transform: translateX(2px);
+}
+
+.rank {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #fbbf24;
+    min-width: 32px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+    margin-left: 16px;
+}
+
+.score {
+    font-weight: 600;
+    color: #34d399;
+    font-size: 1rem;
+}
+
+/* Game Stats */
+.game-stats {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+    padding: 16px;
+    background: rgba(30, 41, 59, 0.4);
+    border: 1px solid rgba(148, 163, 184, 0.1);
+    border-radius: 8px;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #34d399;
+}
+
+.game-controls {
+    margin: 20px 0;
+}
+
+/* Utility Classes */
+.hidden {
+    display: none;
+}
+
+/* Animations */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes scoreFloat {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -100px) scale(1.5);
+    }
+}
+
+.leaderboard-item {
+    animation: slideIn 0.3s ease-out;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 16px;
+    }
+    
+    .main-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .header h1 {
+        font-size: 2rem;
+    }
+    
+    .game-options {
+        grid-template-columns: 1fr;
+    }
+    
+    .auth-section, .game-selection {
+        padding: 24px;
+    }
+    
+    .board-2048 {
+        width: 260px;
+        height: 260px;
+    }
+    
+    .board-tetris {
+        width: 220px;
+        height: 440px;
+    }
+}
+
+@media (max-width: 480px) {
+    .auth-tabs {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .tab-btn {
+        padding: 12px;
+    }
+    
+    .input-field {
+        max-width: 100%;
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎮 GameHub</h1>
+            <p>Play, Compete, and Lead the Leaderboards!</p>
+        </div>
+
+        <!-- Authentication Section -->
+        <div id="authSection" class="auth-section">
+            <div class="auth-tabs">
+                <button class="tab-btn active" onclick="switchTab('signin')">Sign In</button>
+                <button class="tab-btn" onclick="switchTab('signup')">Sign Up</button>
+            </div>
+
+            <!-- Sign In Form -->
+            <div id="signinForm" class="auth-form active">
+                <h2>Welcome Back!</h2>
+                <p>Sign in to continue your gaming journey</p>
+                <br>
+                <div class="error-message" id="signinError"></div>
+                <input type="email" id="signinEmail" class="input-field" placeholder="Email Address" />
+                <input type="password" id="signinPassword" class="input-field" placeholder="Password" />
+                <br>
+                <button class="btn" onclick="signIn()">Sign In</button>
+            </div>
+
+            <!-- Sign Up Form -->
+            <div id="signupForm" class="auth-form">
+                <h2>Join GameHub!</h2>
+                <p>Create your account to start playing and competing</p>
+                <br>
+                <div class="error-message" id="signupError"></div>
+                <div class="success-message" id="signupSuccess"></div>
+                <input type="text" id="signupName" class="input-field" placeholder="Full Name" />
+                <input type="email" id="signupEmail" class="input-field" placeholder="Email Address" />
+                <input type="password" id="signupPassword" class="input-field" placeholder="Password" />
+                <input type="password" id="signupConfirmPassword" class="input-field" placeholder="Confirm Password" />
+                <input type="text" id="signupEvmAddress" class="input-field" placeholder="EVM Wallet Address (0x...)" />
+                <br>
+                <button class="btn" onclick="signUp()">Create Account</button>
+            </div>
+        </div>
+
+        <!-- User Profile Section -->
+        <div id="userProfile" class="user-profile hidden">
+            <div id="userAvatar" class="profile-pic">👤</div>
+            <div id="userName"></div>
+            <div>Total Points: <span id="userTotalPoints" class="stat-value">0</span></div>
+            <button class="btn" onclick="signOut()">Sign Out</button>
+        </div>
+
+        <!-- Game Selection Section -->
+        <div id="gameSelection" class="game-selection hidden">
+            <h2>Choose Your Game</h2>
+            <p>Select a game to play and compete on the leaderboards</p>
+            
+            <div class="game-options">
+                <div class="game-option" onclick="selectGame('2048')">
+                    <h3>🎯 2048</h3>
+                    <p>Combine tiles to reach the 2048 tile and beyond!</p>
+                    <p><strong>Best Score:</strong> <span id="best2048Display">0</span></p>
+                </div>
+                
+                <div class="game-option" onclick="selectGame('tetris')">
+                    <h3>🧩 Tetris</h3>
+                    <p>Clear lines by arranging falling blocks!</p>
+                    <p><strong>Best Score:</strong> <span id="bestTetrisDisplay">0</span></p>
+                </div>
+            </div>
+            
+            <div style="margin-top: 30px;">
+                <button class="btn" onclick="showLeaderboard('2048')">View 2048 Leaderboard</button>
+                <button class="btn" onclick="showLeaderboard('tetris')">View Tetris Leaderboard</button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div id="mainContent" class="main-content hidden">
+            <!-- Game Section -->
+            <div class="game-section">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <button class="btn" onclick="backToSelection()">← Back to Games</button>
+                    <h2 id="currentGameTitle"></h2>
+                    <div></div>
+                </div>
+
+                <!-- 2048 Game -->
+                <div id="game2048" class="hidden">
+                    <div class="game-stats">
+                        <div class="stat">
+                            <div class="stat-value" id="score2048">0</div>
+                            <div>Score</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value" id="best2048">0</div>
+                            <div>Best</div>
+                        </div>
+                    </div>
+                    <div class="game-controls">
+                        <button class="btn" onclick="startGame2048()">New Game</button>
+                    </div>
+                    <div class="game-container">
+                        <div id="board2048" class="board-2048 game-board"></div>
+                    </div>
+                    <p style="margin-top: 15px;">Use arrow keys to move tiles</p>
+                </div>
+
+                <!-- Tetris Game -->
+                <div id="gameTetris" class="hidden">
+                    <div class="game-stats">
+                        <div class="stat">
+                            <div class="stat-value" id="scoreTetris">0</div>
+                            <div>Score</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value" id="levelTetris">1</div>
+                            <div>Level</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value" id="linesTetris">0</div>
+                            <div>Lines</div>
+                        </div>
+                    </div>
+                    <div class="game-controls">
+                        <button class="btn" onclick="startTetris()">Start Game</button>
+                        <button class="btn" onclick="pauseTetris()">Pause</button>
+                    </div>
+                    <div class="game-container">
+                        <div id="boardTetris" class="board-tetris game-board"></div>
+                    </div>
+                    <p style="margin-top: 15px;">Arrow keys to move, Space to rotate</p>
+                </div>
+            </div>
+
+            <!-- Leaderboard -->
+            <div class="leaderboard">
+                <h3 id="leaderboardTitle">🏆 Leaderboard</h3>
+                <div id="leaderboardContent"></div>
+                <div style="margin-top: 20px; text-align: center;">
+                    <button class="btn" onclick="showLeaderboard('2048')" style="font-size: 12px; padding: 8px 16px;">2048</button>
+                    <button class="btn" onclick="showLeaderboard('tetris')" style="font-size: 12px; padding: 8px 16px;">Tetris</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let currentUser = null;
+        let currentGame = null;
+        let game2048State = null;
+        let tetrisState = null;
+        let gameData = {
+            users: {},
+            leaderboards: {
+                '2048': [],
+                'tetris': []
+            }
+        };
+
+        // Authentication Functions
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.auth-form').forEach(form => form.classList.remove('active'));
+            
+            if (tab === 'signin') {
+                document.querySelector('.tab-btn:first-child').classList.add('active');
+                document.getElementById('signinForm').classList.add('active');
+            } else {
+                document.querySelector('.tab-btn:last-child').classList.add('active');
+                document.getElementById('signupForm').classList.add('active');
+            }
+            
+            // Clear error messages
+            document.getElementById('signinError').style.display = 'none';
+            document.getElementById('signupError').style.display = 'none';
+            document.getElementById('signupSuccess').style.display = 'none';
+        }
+
+        function signUp() {
+            const name = document.getElementById('signupName').value.trim();
+            const email = document.getElementById('signupEmail').value.trim();
+            const password = document.getElementById('signupPassword').value;
+            const confirmPassword = document.getElementById('signupConfirmPassword').value;
+            const evmAddress = document.getElementById('signupEvmAddress').value.trim();
+            
+            const errorElement = document.getElementById('signupError');
+            const successElement = document.getElementById('signupSuccess');
+            
+            // Validation
+            if (!name || !email || !password || !confirmPassword || !evmAddress) {
+                showError(errorElement, 'Please fill in all fields');
+                return;
+            }
+            
+            if (!isValidEmail(email)) {
+                showError(errorElement, 'Please enter a valid email address');
+                return;
+            }
+            
+            if (password.length < 6) {
+                showError(errorElement, 'Password must be at least 6 characters long');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                showError(errorElement, 'Passwords do not match');
+                return;
+            }
+            
+            if (!evmAddress.startsWith('0x') || evmAddress.length !== 42) {
+                showError(errorElement, 'Please enter a valid EVM address (42 characters starting with 0x)');
+                return;
+            }
+            
+            // Check if user already exists
+            const existingUser = Object.values(gameData.users).find(user => user.email === email);
+            if (existingUser) {
+                showError(errorElement, 'An account with this email already exists');
+                return;
+            }
+            
+            // Create new user
+            const userId = 'user_' + Date.now();
+            gameData.users[userId] = {
+                id: userId,
+                name: name,
+                email: email,
+                password: password, // In real app, this would be hashed
+                evmAddress: evmAddress,
+                totalPoints: 0,
+                games: {
+                    '2048': { bestScore: 0, gamesPlayed: 0 },
+                    'tetris': { bestScore: 0, gamesPlayed: 0 }
+                }
+            };
+            
+            // Show success message
+            errorElement.style.display = 'none';
+            successElement.textContent = 'Account created successfully! Please sign in.';
+            successElement.style.display = 'block';
+            
+            // Clear form
+            document.getElementById('signupName').value = '';
+            document.getElementById('signupEmail').value = '';
+            document.getElementById('signupPassword').value = '';
+            document.getElementById('signupConfirmPassword').value = '';
+            document.getElementById('signupEvmAddress').value = '';
+            
+            // Switch to sign in tab after a delay
+            setTimeout(() => {
+                switchTab('signin');
+            }, 2000);
+        }
+
+        function signIn() {
+            const email = document.getElementById('signinEmail').value.trim();
+            const password = document.getElementById('signinPassword').value;
+            
+            const errorElement = document.getElementById('signinError');
+            
+            if (!email || !password) {
+                showError(errorElement, 'Please enter both email and password');
+                return;
+            }
+            
+            // Find user
+            const user = Object.values(gameData.users).find(u => u.email === email && u.password === password);
+            
+            if (!user) {
+                showError(errorElement, 'Invalid email or password');
+                return;
+            }
+            
+            // Sign in successful
+            currentUser = user;
+            showMainContent();
+        }
+
+        function signOut() {
+            currentUser = null;
+            currentGame = null;
+            
+            // Stop any running games
+            if (tetrisState && tetrisState.gameLoop) {
+                clearInterval(tetrisState.gameLoop);
+            }
+            
+            document.getElementById('authSection').classList.remove('hidden');
+            document.getElementById('userProfile').classList.add('hidden');
+            document.getElementById('gameSelection').classList.add('hidden');
+            document.getElementById('mainContent').classList.add('hidden');
+            
+            // Clear form fields
+            document.getElementById('signinEmail').value = '';
+            document.getElementById('signinPassword').value = '';
+            
+            // Switch to sign in tab
+            switchTab('signin');
+        }
+
+        function showMainContent() {
+            document.getElementById('authSection').classList.add('hidden');
+            document.getElementById('userProfile').classList.remove('hidden');
+            document.getElementById('gameSelection').classList.remove('hidden');
+            
+            // Update user profile
+            document.getElementById('userName').textContent = currentUser.name;
+            updateUserStats();
+            updateBestScores();
+        }
+
+        function updateUserStats() {
+            if (currentUser) {
+                document.getElementById('userTotalPoints').textContent = currentUser.totalPoints;
+            }
+        }
+
+        function updateBestScores() {
+            if (currentUser) {
+                document.getElementById('best2048Display').textContent = currentUser.games['2048'].bestScore;
+                document.getElementById('bestTetrisDisplay').textContent = currentUser.games['tetris'].bestScore;
+            }
+        }
+
+        function selectGame(game) {
+            currentGame = game;
+            document.getElementById('gameSelection').classList.add('hidden');
+            document.getElementById('mainContent').classList.remove('hidden');
+            
+            // Hide all games first
+            document.getElementById('game2048').classList.add('hidden');
+            document.getElementById('gameTetris').classList.add('hidden');
+            
+            // Show selected game
+            if (game === '2048') {
+                document.getElementById('currentGameTitle').textContent = '🎯 2048';
+                document.getElementById('game2048').classList.remove('hidden');
+                startGame2048();
+                showLeaderboard('2048');
+            } else if (game === 'tetris') {
+                document.getElementById('currentGameTitle').textContent = '🧩 Tetris';
+                document.getElementById('gameTetris').classList.remove('hidden');
+                initializeTetris();
+                showLeaderboard('tetris');
+            }
+        }
+
+        function backToSelection() {
+            // Stop any running games
+            if (tetrisState && tetrisState.gameLoop) {
+                clearInterval(tetrisState.gameLoop);
+                tetrisState.gameRunning = false;
+            }
+            
+            document.removeEventListener('keydown', handle2048Input);
+            document.removeEventListener('keydown', handleTetrisInput);
+            
+            currentGame = null;
+            document.getElementById('mainContent').classList.add('hidden');
+            document.getElementById('gameSelection').classList.remove('hidden');
+        }
+
+        // Helper Functions
+        function showError(element, message) {
+            element.textContent = message;
+            element.style.display = 'block';
+        }
+
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        // 2048 Game Implementation
+        function startGame2048() {
+            game2048State = {
+                board: Array(4).fill().map(() => Array(4).fill(0)),
+                score: 0,
+                gameOver: false
+            };
+            
+            addRandomTile();
+            addRandomTile();
+            render2048();
+            
+            document.addEventListener('keydown', handle2048Input);
+        }
+
+        function addRandomTile() {
+            const emptyCells = [];
+            for (let i = 0; i < 4; i++) {
+                for (let j = 0; j < 4; j++) {
+                    if (game2048State.board[i][j] === 0) {
+                        emptyCells.push({row: i, col: j});
+                    }
+                }
+            }
+            
+            if (emptyCells.length > 0) {
+                const randomCell = emptyCells[Math.floor(Math.random() * emptyCells.length)];
+                game2048State.board[randomCell.row][randomCell.col] = Math.random() < 0.9 ? 2 : 4;
+            }
+        }
+
+        function render2048() {
+            const board = document.getElementById('board2048');
+            board.innerHTML = '';
+            
+            for (let i = 0; i < 4; i++) {
+                for (let j = 0; j < 4; j++) {
+                    const tile = document.createElement('div');
+                    tile.className = 'tile-2048';
+                    const value = game2048State.board[i][j];
+                    
+                    if (value > 0) {
+                        tile.textContent = value;
+                        tile.classList.add(`tile-${value}`);
+                    }
+                    
+                    board.appendChild(tile);
+                }
+            }
+            
+            document.getElementById('score2048').textContent = game2048State.score;
+            
+            if (currentUser) {
+                const bestScore = currentUser.games['2048'].bestScore;
+                document.getElementById('best2048').textContent = bestScore;
+            }
+        }
+
+        function handle2048Input(e) {
+            if (currentGame !== '2048' || game2048State.gameOver) return;
+            
+            let moved = false;
+            
+            switch(e.key) {
+                case 'ArrowUp':
+                    e.preventDefault();
+                    moved = move2048Up();
+                    break;
+                case 'ArrowDown':
+                    e.preventDefault();
+                    moved = move2048Down();
+                    break;
+                case 'ArrowLeft':
+                    e.preventDefault();
+                    moved = move2048Left();
+                    break;
+                case 'ArrowRight':
+                    e.preventDefault();
+                    moved = move2048Right();
+                    break;
+            }
+            
+            if (moved) {
+                addRandomTile();
+                render2048();
+                
+                if (checkGameOver2048()) {
+                    game2048State.gameOver = true;
+                    endGame2048();
+                }
+            }
+        }
+
+        function move2048Left() {
+            let moved = false;
+            for (let i = 0; i < 4; i++) {
+                const row = game2048State.board[i].filter(val => val !== 0);
+                for (let j = 0; j < row.length - 1; j++) {
+                    if (row[j] === row[j + 1]) {
+                        row[j] *= 2;
+                        game2048State.score += row[j];
+                        row.splice(j + 1, 1);
+                    }
+                }
+                while (row.length < 4) {
+                    row.push(0);
+                }
+                
+                for (let j = 0; j < 4; j++) {
+                    if (game2048State.board[i][j] !== row[j]) {
+                        moved = true;
+                    }
+                    game2048State.board[i][j] = row[j];
+                }
+            }
+            return moved;
+        }
+
+        function move2048Right() {
+            let moved = false;
+            for (let i = 0; i < 4; i++) {
+                const row = game2048State.board[i].filter(val => val !== 0);
+                for (let j = row.length - 1; j > 0; j--) {
+                    if (row[j] === row[j - 1]) {
+                        row[j] *= 2;
+                        game2048State.score += row[j];
+                        row.splice(j - 1, 1);
+                        j--;
+                    }
+                }
+                while (row.length < 4) {
+                    row.unshift(0);
+                }
+                
+                for (let j = 0; j < 4; j++) {
+                    if (game2048State.board[i][j] !== row[j]) {
+                        moved = true;
+                    }
+                    game2048State.board[i][j] = row[j];
+                }
+            }
+            return moved;
+        }
+
+        function move2048Up() {
+            let moved = false;
+            for (let j = 0; j < 4; j++) {
+                const col = [];
+                for (let i = 0; i < 4; i++) {
+                    if (game2048State.board[i][j] !== 0) {
+                        col.push(game2048State.board[i][j]);
+                    }
+                }
+                
+                for (let i = 0; i < col.length - 1; i++) {
+                    if (col[i] === col[i + 1]) {
+                        col[i] *= 2;
+                        game2048State.score += col[i];
+                        col.splice(i + 1, 1);
+                    }
+                }
+                
+                while (col.length < 4) {
+                    col.push(0);
+                }
+                
+                for (let i = 0; i < 4; i++) {
+                    if (game2048State.board[i][j] !== col[i]) {
+                        moved = true;
+                    }
+                    game2048State.board[i][j] = col[i];
+                }
+            }
+            return moved;
+        }
+
+        function move2048Down() {
+            let moved = false;
+            for (let j = 0; j < 4; j++) {
+                const col = [];
+                for (let i = 0; i < 4; i++) {
+                    if (game2048State.board[i][j] !== 0) {
+                        col.push(game2048State.board[i][j]);
+                    }
+                }
+                
+                for (let i = col.length - 1; i > 0; i--) {
+                    if (col[i] === col[i - 1]) {
+                        col[i] *= 2;
+                        game2048State.score += col[i];
+                        col.splice(i - 1, 1);
+                        i--;
+                    }
+                }
+                
+                while (col.length < 4) {
+                    col.unshift(0);
+                }
+                
+                for (let i = 0; i < 4; i++) {
+                    if (game2048State.board[i][j] !== col[i]) {
+                        moved = true;
+                    }
+                    game2048State.board[i][j] = col[i];
+                }
+            }
+            return moved;
+        }
+
+        function checkGameOver2048() {
+            // Check for empty cells
+            for (let i = 0; i < 4; i++) {
+                for (let j = 0; j < 4; j++) {
+                    if (game2048State.board[i][j] === 0) {
+                        return false;
+                    }
+                }
+            }
+            
+            // Check for possible merges
+            for (let i = 0; i < 4; i++) {
+                for (let j = 0; j < 3; j++) {
+                    if (game2048State.board[i][j] === game2048State.board[i][j + 1]) {
+                        return false;
+                    }
+                }
+            }
+            
+            for (let j = 0; j < 4; j++) {
+                for (let i = 0; i < 3; i++) {
+                    if (game2048State.board[i][j] === game2048State.board[i + 1][j]) {
+                        return false;
+                    }
+                }
+            }
+            
+            return true;
+        }
+
+        function endGame2048() {
+            updateScore('2048', game2048State.score);
+            alert(`Game Over! Final Score: ${game2048State.score}`);
+        }
+
+        // Simplified Tetris Implementation
+        // Enhanced Tetris Implementation with 7 different pieces
+// Replace the existing Tetris functions in your HTML file with this code
+
+// Tetris piece definitions (all 7 classic Tetrominoes)
+const TETRIS_PIECES = {
+    I: {
+        shape: [
+            [0, 0, 0, 0],
+            [1, 1, 1, 1],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0]
+        ],
+        color: '#00f0f0' // Cyan
+    },
+    O: {
+        shape: [
+            [1, 1],
+            [1, 1]
+        ],
+        color: '#f0f000' // Yellow
+    },
+    T: {
+        shape: [
+            [0, 1, 0],
+            [1, 1, 1],
+            [0, 0, 0]
+        ],
+        color: '#a000f0' // Purple
+    },
+    S: {
+        shape: [
+            [0, 1, 1],
+            [1, 1, 0],
+            [0, 0, 0]
+        ],
+        color: '#00f000' // Green
+    },
+    Z: {
+        shape: [
+            [1, 1, 0],
+            [0, 1, 1],
+            [0, 0, 0]
+        ],
+        color: '#f00000' // Red
+    },
+    J: {
+        shape: [
+            [1, 0, 0],
+            [1, 1, 1],
+            [0, 0, 0]
+        ],
+        color: '#0000f0' // Blue
+    },
+    L: {
+        shape: [
+            [0, 0, 1],
+            [1, 1, 1],
+            [0, 0, 0]
+        ],
+        color: '#f0a000' // Orange
+    }
+};
+
+const PIECE_NAMES = Object.keys(TETRIS_PIECES);
+
+function initializeTetris() {
+    tetrisState = {
+        board: Array(20).fill().map(() => Array(10).fill(null)),
+        score: 0,
+        level: 1,
+        lines: 0,
+        gameRunning: false,
+        currentPiece: null,
+        nextPiece: null,
+        gameLoop: null,
+        dropTime: 1000,
+        lastDrop: 0
+    };
+    
+    // Generate first and next pieces
+    tetrisState.nextPiece = generateRandomPiece();
+    spawnNewPiece();
+    renderTetris();
+}
+
+function generateRandomPiece() {
+    const pieceType = PIECE_NAMES[Math.floor(Math.random() * PIECE_NAMES.length)];
+    const pieceData = TETRIS_PIECES[pieceType];
+    
+    return {
+        type: pieceType,
+        shape: pieceData.shape.map(row => [...row]), // Deep copy
+        color: pieceData.color,
+        x: Math.floor((10 - pieceData.shape[0].length) / 2),
+        y: 0,
+        rotation: 0
+    };
+}
+
+function startTetris() {
+    if (!tetrisState.gameRunning) {
+        tetrisState.gameRunning = true;
+        tetrisState.score = 0;
+        tetrisState.level = 1;
+        tetrisState.lines = 0;
+        tetrisState.board = Array(20).fill().map(() => Array(10).fill(null));
+        tetrisState.dropTime = 1000;
+        tetrisState.lastDrop = Date.now();
+        
+        tetrisState.nextPiece = generateRandomPiece();
+        spawnNewPiece();
+        
+        tetrisState.gameLoop = setInterval(gameUpdate, 16); // 60 FPS
+        
+        document.addEventListener('keydown', handleTetrisInput);
+        renderTetris();
+    }
+}
+
+function pauseTetris() {
+    if (tetrisState.gameRunning) {
+        clearInterval(tetrisState.gameLoop);
+        tetrisState.gameRunning = false;
+        document.getElementById('scoreTetris').textContent = tetrisState.score + ' (PAUSED)';
+    } else if (tetrisState.gameLoop === null) {
+        // Resume game
+        tetrisState.gameRunning = true;
+        tetrisState.lastDrop = Date.now();
+        tetrisState.gameLoop = setInterval(gameUpdate, 16);
+        renderTetris();
+    }
+}
+
+function gameUpdate() {
+    const now = Date.now();
+    if (now - tetrisState.lastDrop > tetrisState.dropTime) {
+        dropPiece();
+        tetrisState.lastDrop = now;
+    }
+}
+
+function spawnNewPiece() {
+    tetrisState.currentPiece = tetrisState.nextPiece;
+    tetrisState.nextPiece = generateRandomPiece();
+    
+    // Check for game over
+    if (!canMovePiece(tetrisState.currentPiece, 0, 0)) {
+        endTetris();
+    }
+}
+
+function dropPiece() {
+    if (!tetrisState.currentPiece) return;
+    
+    if (canMovePiece(tetrisState.currentPiece, 0, 1)) {
+        tetrisState.currentPiece.y++;
+    } else {
+        placePiece();
+        clearLines();
+        spawnNewPiece();
+    }
+    
+    renderTetris();
+}
+
+function canMovePiece(piece, dx, dy, newShape = null) {
+    if (!piece) return false;
+    
+    const shape = newShape || piece.shape;
+    const newX = piece.x + dx;
+    const newY = piece.y + dy;
+    
+    for (let i = 0; i < shape.length; i++) {
+        for (let j = 0; j < shape[i].length; j++) {
+            if (shape[i][j]) {
+                const boardX = newX + j;
+                const boardY = newY + i;
+                
+                // Check boundaries
+                if (boardX < 0 || boardX >= 10 || boardY >= 20) {
+                    return false;
+                }
+                
+                // Check collision with placed pieces
+                if (boardY >= 0 && tetrisState.board[boardY][boardX]) {
+                    return false;
+                }
+            }
+        }
+    }
+    
+    return true;
+}
+
+function placePiece() {
+    const piece = tetrisState.currentPiece;
+    if (!piece) return;
+    
+    for (let i = 0; i < piece.shape.length; i++) {
+        for (let j = 0; j < piece.shape[i].length; j++) {
+            if (piece.shape[i][j]) {
+                const boardY = piece.y + i;
+                const boardX = piece.x + j;
+                if (boardY >= 0 && boardY < 20 && boardX >= 0 && boardX < 10) {
+                    tetrisState.board[boardY][boardX] = piece.color;
+                }
+            }
+        }
+    }
+    
+    tetrisState.score += 10;
+}
+
+function clearLines() {
+    let linesCleared = 0;
+    
+    for (let i = 19; i >= 0; i--) {
+        if (tetrisState.board[i].every(cell => cell !== null)) {
+            tetrisState.board.splice(i, 1);
+            tetrisState.board.unshift(Array(10).fill(null));
+            linesCleared++;
+            i++; // Check the same line again
+        }
+    }
+    
+    if (linesCleared > 0) {
+        tetrisState.lines += linesCleared;
+        
+        // Scoring system
+        const lineScores = [0, 100, 300, 500, 800];
+        tetrisState.score += lineScores[linesCleared] * tetrisState.level;
+        
+        // Level progression
+        tetrisState.level = Math.floor(tetrisState.lines / 10) + 1;
+        
+        // Increase drop speed
+        tetrisState.dropTime = Math.max(50, 1000 - (tetrisState.level - 1) * 50);
+    }
+}
+
+function rotatePiece() {
+    if (!tetrisState.currentPiece) return;
+    
+    const rotatedShape = rotateMatrix(tetrisState.currentPiece.shape);
+    
+    if (canMovePiece(tetrisState.currentPiece, 0, 0, rotatedShape)) {
+        tetrisState.currentPiece.shape = rotatedShape;
+        tetrisState.currentPiece.rotation = (tetrisState.currentPiece.rotation + 1) % 4;
+        renderTetris();
+    }
+}
+
+function rotateMatrix(matrix) {
+    const n = matrix.length;
+    const rotated = Array(n).fill().map(() => Array(n).fill(0));
+    
+    for (let i = 0; i < n; i++) {
+        for (let j = 0; j < n; j++) {
+            rotated[j][n - 1 - i] = matrix[i][j];
+        }
+    }
+    
+    return rotated;
+}
+
+function handleTetrisInput(e) {
+    if (!tetrisState.gameRunning || !tetrisState.currentPiece) return;
+    
+    switch(e.key) {
+        case 'ArrowLeft':
+        case 'a':
+        case 'A':
+            e.preventDefault();
+            if (canMovePiece(tetrisState.currentPiece, -1, 0)) {
+                tetrisState.currentPiece.x--;
+                renderTetris();
+            }
+            break;
+            
+        case 'ArrowRight':
+        case 'd':
+        case 'D':
+            e.preventDefault();
+            if (canMovePiece(tetrisState.currentPiece, 1, 0)) {
+                tetrisState.currentPiece.x++;
+                renderTetris();
+            }
+            break;
+            
+        case 'ArrowDown':
+        case 's':
+        case 'S':
+            e.preventDefault();
+            dropPiece();
+            break;
+            
+        case 'ArrowUp':
+        case 'w':
+        case 'W':
+        case ' ':
+            e.preventDefault();
+            rotatePiece();
+            break;
+            
+        case 'Enter':
+            e.preventDefault();
+            // Hard drop
+            while (canMovePiece(tetrisState.currentPiece, 0, 1)) {
+                tetrisState.currentPiece.y++;
+                tetrisState.score += 2; // Bonus points for hard drop
+            }
+            dropPiece();
+            break;
+    }
+}
+
+function renderTetris() {
+    const board = document.getElementById('boardTetris');
+    board.innerHTML = '';
+    
+    // Create board cells
+    for (let i = 0; i < 20; i++) {
+        for (let j = 0; j < 10; j++) {
+            const cell = document.createElement('div');
+            cell.className = 'tetris-cell';
+            
+            // Set placed piece colors
+            if (tetrisState.board[i][j]) {
+                cell.style.backgroundColor = tetrisState.board[i][j];
+                cell.classList.add('filled');
+            }
+            
+            board.appendChild(cell);
+        }
+    }
+    
+    // Render current piece
+    if (tetrisState.currentPiece) {
+        const piece = tetrisState.currentPiece;
+        for (let i = 0; i < piece.shape.length; i++) {
+            for (let j = 0; j < piece.shape[i].length; j++) {
+                if (piece.shape[i][j]) {
+                    const boardY = piece.y + i;
+                    const boardX = piece.x + j;
+                    
+                    if (boardY >= 0 && boardY < 20 && boardX >= 0 && boardX < 10) {
+                        const cellIndex = boardY * 10 + boardX;
+                        if (cellIndex < board.children.length) {
+                            const cell = board.children[cellIndex];
+                            cell.style.backgroundColor = piece.color;
+                            cell.classList.add('filled');
+                            cell.style.opacity = '0.8'; // Slightly transparent for current piece
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    // Update stats
+    document.getElementById('scoreTetris').textContent = tetrisState.score;
+    document.getElementById('levelTetris').textContent = tetrisState.level;
+    document.getElementById('linesTetris').textContent = tetrisState.lines;
+}
+
+function endTetris() {
+    clearInterval(tetrisState.gameLoop);
+    tetrisState.gameLoop = null;
+    tetrisState.gameRunning = false;
+    
+    document.removeEventListener('keydown', handleTetrisInput);
+    
+    // Update score in the main game system if it exists
+    if (typeof updateScore === 'function') {
+        updateScore('tetris', tetrisState.score);
+    }
+    
+    alert(`Game Over! Final Score: ${tetrisState.score}\nLines Cleared: ${tetrisState.lines}\nLevel Reached: ${tetrisState.level}`);
+}
+
+        // Score and Leaderboard Management
+        function updateScore(game, score) {
+            if (!currentUser || !gameData.users[currentUser.id]) return;
+            
+            const user = gameData.users[currentUser.id];
+            user.games[game].gamesPlayed++;
+            
+            if (score > user.games[game].bestScore) {
+                user.games[game].bestScore = score;
+            }
+            
+            // Calculate total points (sum of best scores)
+            user.totalPoints = user.games['2048'].bestScore + user.games['tetris'].bestScore;
+            
+            // Update leaderboard
+            updateLeaderboard(game, score);
+            updateUserStats();
+        }
+
+        function updateLeaderboard(game, score) {
+            if (!currentUser) return;
+            
+            const leaderboard = gameData.leaderboards[game];
+            const existingEntry = leaderboard.find(entry => entry.userId === currentUser.id);
+            
+            if (existingEntry) {
+                if (score > existingEntry.score) {
+                    existingEntry.score = score;
+                    existingEntry.date = new Date().toISOString();
+                }
+            } else {
+                leaderboard.push({
+                    userId: currentUser.id,
+                    name: currentUser.name,
+                    score: score,
+                    date: new Date().toISOString(),
+                    evmAddress: currentUser.evmAddress
+                });
+            }
+            
+            // Sort leaderboard by score (descending)
+            leaderboard.sort((a, b) => b.score - a.score);
+            
+            // Keep only top 10
+            gameData.leaderboards[game] = leaderboard.slice(0, 10);
+        }
+
+        function showLeaderboard(game) {
+            const content = document.getElementById('leaderboardContent');
+            const leaderboard = gameData.leaderboards[game];
+            
+            if (leaderboard.length === 0) {
+                content.innerHTML = `
+                    <div style="text-align: center; padding: 20px;">
+                        <p>No scores yet!</p>
+                        <p>Be the first to play ${game.toUpperCase()}!</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            content.innerHTML = leaderboard.map((entry, index) => `
+                <div class="leaderboard-item">
+                    <div class="rank">${index + 1}</div>
+                    <div class="user-info">
+                        <div>
+                            <div style="font-weight: bold;">${entry.name}</div>
+                            <div style="font-size: 0.8em; opacity: 0.7;">
+                                ${entry.evmAddress.substring(0, 6)}...${entry.evmAddress.substring(entry.evmAddress.length - 4)}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="score">${entry.score.toLocaleString()}</div>
+                </div>
+            `).join('');
+        }
+
+        // Initialize some demo data for leaderboard
+        function initializeDemoData() {
+            // Add some demo scores to make leaderboard interesting
+            const demoUsers = [
+                { id: 'demo1', name: 'CryptoGamer', evmAddress: '0x1234567890abcdef1234567890abcdef12345678', score2048: 4096, scoreTetris: 15000 },
+                { id: 'demo2', name: 'BlockchainPro', evmAddress: '0xabcdef1234567890abcdef1234567890abcdef12', score2048: 2048, scoreTetris: 12000 },
+                { id: 'demo3', name: 'Web3Player', evmAddress: '0x9876543210fedcba9876543210fedcba98765432', score2048: 1024, scoreTetris: 8000 }
+            ];
+            
+            demoUsers.forEach(user => {
+                gameData.leaderboards['2048'].push({
+                    userId: user.id,
+                    name: user.name,
+                    score: user.score2048,
+                    date: new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000).toISOString(),
+                    evmAddress: user.evmAddress
+                });
+                
+                gameData.leaderboards['tetris'].push({
+                    userId: user.id,
+                    name: user.name,
+                    score: user.scoreTetris,
+                    date: new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000).toISOString(),
+                    evmAddress: user.evmAddress
+                });
+            });
+            
+            // Sort leaderboards
+            gameData.leaderboards['2048'].sort((a, b) => b.score - a.score);
+            gameData.leaderboards['tetris'].sort((a, b) => b.score - a.score);
+        }
+
+        // Initialize demo data when page loads
+        window.addEventListener('load', () => {
+            initializeDemoData();
+        });
+
+        // Add some visual feedback and animations
+        function addScoreAnimation(points) {
+            const scoreElement = document.createElement('div');
+            scoreElement.textContent = `+${points}`;
+            scoreElement.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                color: #4ecdc4;
+                font-size: 2rem;
+                font-weight: bold;
+                pointer-events: none;
+                z-index: 1000;
+                animation: scoreFloat 2s ease-out forwards;
+            `;
+            
+            document.body.appendChild(scoreElement);
+            
+            setTimeout(() => {
+                document.body.removeChild(scoreElement);
+            }, 2000);
+        }
+
+        // Add CSS animation for score popup
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes scoreFloat {
+                0% {
+                    opacity: 1;
+                    transform: translate(-50%, -50%) scale(1);
+                }
+                100% {
+                    opacity: 0;
+                    transform: translate(-50%, -100px) scale(1.5);
+                }
+            }
+            
+            .tile-2048 {
+                transition: all 0.2s ease-in-out;
+            }
+            
+            .leaderboard-item {
+                animation: slideIn 0.3s ease-out;
+            }
+            
+            @keyframes slideIn {
+                from {
+                    opacity: 0;
+                    transform: translateX(-20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
