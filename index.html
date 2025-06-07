@@ -478,6 +478,248 @@ body {
     animation: slideIn 0.3s ease-out;
 }
 
+/* Mobile Touch Controls Styles */
+.touch-controls {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    margin-top: 20px;
+    padding: 20px;
+    background: rgba(30, 41, 59, 0.4);
+    border: 1px solid rgba(148, 163, 184, 0.1);
+    border-radius: 12px;
+}
+
+/* 2048 Touch Controls */
+.touch-controls-2048 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    width: 180px;
+    height: 180px;
+}
+
+.touch-btn {
+    background: rgba(59, 130, 246, 0.2);
+    border: 2px solid rgba(59, 130, 246, 0.4);
+    border-radius: 12px;
+    color: #3b82f6;
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    touch-action: manipulation;
+    min-height: 50px;
+}
+
+.touch-btn:hover,
+.touch-btn:active {
+    background: rgba(59, 130, 246, 0.3);
+    border-color: rgba(59, 130, 246, 0.6);
+    transform: scale(0.95);
+}
+
+.touch-btn:active {
+    background: rgba(59, 130, 246, 0.4);
+}
+
+/* Directional buttons positioning */
+.touch-btn-up {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.touch-btn-left {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.touch-btn-down {
+    grid-column: 2;
+    grid-row: 3;
+}
+
+.touch-btn-right {
+    grid-column: 3;
+    grid-row: 2;
+}
+
+/* Tetris Touch Controls */
+.touch-controls-tetris {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    max-width: 300px;
+}
+
+.tetris-controls-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.tetris-move-controls {
+    display: flex;
+    gap: 8px;
+    flex: 1;
+}
+
+.tetris-action-controls {
+    display: flex;
+    gap: 8px;
+}
+
+.touch-btn-tetris {
+    background: rgba(139, 92, 246, 0.2);
+    border: 2px solid rgba(139, 92, 246, 0.4);
+    border-radius: 8px;
+    color: #8b5cf6;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    touch-action: manipulation;
+    min-height: 44px;
+    flex: 1;
+    min-width: 60px;
+}
+
+.touch-btn-tetris:hover,
+.touch-btn-tetris:active {
+    background: rgba(139, 92, 246, 0.3);
+    border-color: rgba(139, 92, 246, 0.6);
+    transform: scale(0.95);
+}
+
+.touch-btn-tetris:active {
+    background: rgba(139, 92, 246, 0.4);
+}
+
+.touch-btn-rotate {
+    background: rgba(34, 197, 94, 0.2);
+    border-color: rgba(34, 197, 94, 0.4);
+    color: #22c55e;
+}
+
+.touch-btn-rotate:hover,
+.touch-btn-rotate:active {
+    background: rgba(34, 197, 94, 0.3);
+    border-color: rgba(34, 197, 94, 0.6);
+}
+
+.touch-btn-drop {
+    background: rgba(239, 68, 68, 0.2);
+    border-color: rgba(239, 68, 68, 0.4);
+    color: #ef4444;
+}
+
+.touch-btn-drop:hover,
+.touch-btn-drop:active {
+    background: rgba(239, 68, 68, 0.3);
+    border-color: rgba(239, 68, 68, 0.6);
+}
+
+/* Swipe gesture indicator */
+.swipe-indicator {
+    text-align: center;
+    color: #94a3b8;
+    font-size: 14px;
+    margin-top: 10px;
+    padding: 10px;
+    background: rgba(15, 23, 42, 0.3);
+    border-radius: 8px;
+    border-left: 3px solid #3b82f6;
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 768px) {
+    .touch-controls {
+        display: flex;
+    }
+    
+    .game-board {
+        touch-action: none;
+    }
+    
+    /* Adjust game board sizes for mobile */
+    .board-2048 {
+        width: 280px;
+        height: 280px;
+    }
+    
+    .board-tetris {
+        width: 240px;
+        height: 480px;
+    }
+    
+    /* Make touch buttons larger on small screens */
+    .touch-btn {
+        min-height: 55px;
+        font-size: 22px;
+    }
+    
+    .touch-btn-tetris {
+        min-height: 48px;
+        font-size: 15px;
+    }
+    
+    /* Optimize game stats layout */
+    .game-stats {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+    
+    .stat {
+        min-width: 80px;
+    }
+}
+
+@media (max-width: 480px) {
+    .board-2048 {
+        width: 240px;
+        height: 240px;
+    }
+    
+    .board-tetris {
+        width: 200px;
+        height: 400px;
+    }
+    
+    .touch-controls-2048 {
+        width: 160px;
+        height: 160px;
+    }
+    
+    .touch-btn {
+        min-height: 50px;
+        font-size: 18px;
+    }
+    
+    .tetris-controls-row {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .tetris-move-controls {
+        order: 2;
+    }
+    
+    .tetris-action-controls {
+        order: 1;
+        justify-content: center;
+    }
+}
+        
 /* Responsive Design */
 @media (max-width: 768px) {
     .container {
@@ -1707,6 +1949,371 @@ document.addEventListener('DOMContentLoaded', () => {
     // Check for existing authentication
     checkExistingAuth();
 });
+
+// Mobile Touch Controls JavaScript
+
+// Touch and swipe handling variables
+let touchStartX = 0;
+let touchStartY = 0;
+let touchEndX = 0;
+let touchEndY = 0;
+let isSwiping = false;
+let swipeThreshold = 50; // Minimum distance for a swipe
+let swipeVelocityThreshold = 0.3; // Minimum velocity for a swipe
+
+// Initialize mobile controls when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    initializeMobileControls();
+});
+
+function initializeMobileControls() {
+    // Add touch controls HTML to games
+    addTouchControlsToGames();
+    
+    // Add swipe gesture handlers
+    addSwipeHandlers();
+    
+    // Add touch button handlers
+    addTouchButtonHandlers();
+    
+    // Prevent scrolling on game boards
+    preventScrollOnGameBoards();
+}
+
+function addTouchControlsToGames() {
+    // Add 2048 touch controls
+    const game2048 = document.getElementById('game2048');
+    if (game2048) {
+        const touchControls2048 = `
+            <div class="touch-controls" id="touchControls2048">
+                <div class="touch-controls-2048">
+                    <button class="touch-btn touch-btn-up" data-direction="up">↑</button>
+                    <button class="touch-btn touch-btn-left" data-direction="left">←</button>
+                    <button class="touch-btn touch-btn-down" data-direction="down">↓</button>
+                    <button class="touch-btn touch-btn-right" data-direction="right">→</button>
+                </div>
+                <div class="swipe-indicator">
+                    💡 Swipe on the game board or use buttons above
+                </div>
+            </div>
+        `;
+        game2048.insertAdjacentHTML('beforeend', touchControls2048);
+    }
+    
+    // Add Tetris touch controls
+    const gameTetris = document.getElementById('gameTetris');
+    if (gameTetris) {
+        const touchControlsTetris = `
+            <div class="touch-controls" id="touchControlsTetris">
+                <div class="touch-controls-tetris">
+                    <div class="tetris-controls-row">
+                        <div class="tetris-action-controls">
+                            <button class="touch-btn-tetris touch-btn-rotate" data-action="rotate">🔄 Rotate</button>
+                            <button class="touch-btn-tetris touch-btn-drop" data-action="drop">⬇ Drop</button>
+                        </div>
+                    </div>
+                    <div class="tetris-controls-row">
+                        <div class="tetris-move-controls">
+                            <button class="touch-btn-tetris" data-direction="left">← Left</button>
+                            <button class="touch-btn-tetris" data-direction="down">↓ Down</button>
+                            <button class="touch-btn-tetris" data-direction="right">→ Right</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="swipe-indicator">
+                    💡 Tap to move/rotate or swipe on the game board
+                </div>
+            </div>
+        `;
+        gameTetris.insertAdjacentHTML('beforeend', touchControlsTetris);
+    }
+}
+
+function addSwipeHandlers() {
+    // Add swipe handlers to game boards
+    const board2048 = document.getElementById('board2048');
+    const boardTetris = document.getElementById('boardTetris');
+    
+    if (board2048) {
+        addSwipeHandler(board2048, handle2048Swipe);
+    }
+    
+    if (boardTetris) {
+        addSwipeHandler(boardTetris, handleTetrisSwipe);
+    }
+}
+
+function addSwipeHandler(element, swipeCallback) {
+    let startTime = 0;
+    
+    element.addEventListener('touchstart', function(e) {
+        e.preventDefault();
+        const touch = e.touches[0];
+        touchStartX = touch.clientX;
+        touchStartY = touch.clientY;
+        startTime = Date.now();
+        isSwiping = true;
+    }, { passive: false });
+    
+    element.addEventListener('touchmove', function(e) {
+        e.preventDefault();
+        if (!isSwiping) return;
+        
+        const touch = e.touches[0];
+        touchEndX = touch.clientX;
+        touchEndY = touch.clientY;
+    }, { passive: false });
+    
+    element.addEventListener('touchend', function(e) {
+        e.preventDefault();
+        if (!isSwiping) return;
+        
+        const endTime = Date.now();
+        const timeDiff = endTime - startTime;
+        const distance = Math.sqrt(
+            Math.pow(touchEndX - touchStartX, 2) + 
+            Math.pow(touchEndY - touchStartY, 2)
+        );
+        const velocity = distance / timeDiff;
+        
+        if (distance > swipeThreshold && velocity > swipeVelocityThreshold) {
+            const deltaX = touchEndX - touchStartX;
+            const deltaY = touchEndY - touchStartY;
+            
+            let direction = '';
+            if (Math.abs(deltaX) > Math.abs(deltaY)) {
+                direction = deltaX > 0 ? 'right' : 'left';
+            } else {
+                direction = deltaY > 0 ? 'down' : 'up';
+            }
+            
+            swipeCallback(direction);
+        }
+        
+        isSwiping = false;
+    }, { passive: false });
+}
+
+function addTouchButtonHandlers() {
+    // 2048 touch button handlers
+    document.addEventListener('click', function(e) {
+        if (e.target.matches('.touch-btn[data-direction]')) {
+            const direction = e.target.getAttribute('data-direction');
+            handle2048Move(direction);
+        }
+        
+        if (e.target.matches('.touch-btn-tetris[data-direction]')) {
+            const direction = e.target.getAttribute('data-direction');
+            handleTetrisMove(direction);
+        }
+        
+        if (e.target.matches('.touch-btn-tetris[data-action]')) {
+            const action = e.target.getAttribute('data-action');
+            handleTetrisAction(action);
+        }
+    });
+    
+    // Add touch feedback
+    document.addEventListener('touchstart', function(e) {
+        if (e.target.matches('.touch-btn, .touch-btn-tetris')) {
+            e.target.style.transform = 'scale(0.9)';
+        }
+    });
+    
+    document.addEventListener('touchend', function(e) {
+        if (e.target.matches('.touch-btn, .touch-btn-tetris')) {
+            setTimeout(() => {
+                e.target.style.transform = '';
+            }, 100);
+        }
+    });
+}
+
+function preventScrollOnGameBoards() {
+    const gameBoards = document.querySelectorAll('.game-board');
+    gameBoards.forEach(board => {
+        board.addEventListener('touchmove', function(e) {
+            e.preventDefault();
+        }, { passive: false });
+    });
+}
+
+// 2048 Game Controls
+function handle2048Swipe(direction) {
+    handle2048Move(direction);
+}
+
+function handle2048Move(direction) {
+    // This function should integrate with your existing 2048 game logic
+    if (currentGame !== '2048' || !game2048State) return;
+    
+    // Simulate keyboard event for existing game logic
+    const keyMap = {
+        'up': 'ArrowUp',
+        'down': 'ArrowDown',
+        'left': 'ArrowLeft',
+        'right': 'ArrowRight'
+    };
+    
+    const keyCode = keyMap[direction];
+    if (keyCode) {
+        // Create and dispatch a keyboard event
+        const event = new KeyboardEvent('keydown', {
+            key: keyCode,
+            code: keyCode,
+            which: getKeyCode(keyCode),
+            keyCode: getKeyCode(keyCode)
+        });
+        document.dispatchEvent(event);
+        
+        // Add visual feedback
+        addTouchFeedback(direction);
+    }
+}
+
+// Tetris Game Controls
+function handleTetrisSwipe(direction) {
+    handleTetrisMove(direction);
+}
+
+function handleTetrisMove(direction) {
+    if (currentGame !== 'tetris' || !tetrisState) return;
+    
+    const keyMap = {
+        'left': 'ArrowLeft',
+        'right': 'ArrowRight',
+        'down': 'ArrowDown'
+    };
+    
+    const keyCode = keyMap[direction];
+    if (keyCode) {
+        const event = new KeyboardEvent('keydown', {
+            key: keyCode,
+            code: keyCode,
+            which: getKeyCode(keyCode),
+            keyCode: getKeyCode(keyCode)
+        });
+        document.dispatchEvent(event);
+        
+        addTouchFeedback(direction, 'tetris');
+    }
+}
+
+function handleTetrisAction(action) {
+    if (currentGame !== 'tetris' || !tetrisState) return;
+    
+    let keyCode = '';
+    if (action === 'rotate') {
+        keyCode = 'Space';
+    } else if (action === 'drop') {
+        keyCode = 'ArrowDown'; // Fast drop
+    }
+    
+    if (keyCode) {
+        const event = new KeyboardEvent('keydown', {
+            key: keyCode,
+            code: keyCode,
+            which: getKeyCode(keyCode),
+            keyCode: getKeyCode(keyCode)
+        });
+        document.dispatchEvent(event);
+        
+        addTouchFeedback(action, 'tetris');
+    }
+}
+
+// Utility functions
+function getKeyCode(key) {
+    const keyCodes = {
+        'ArrowUp': 38,
+        'ArrowDown': 40,
+        'ArrowLeft': 37,
+        'ArrowRight': 39,
+        'Space': 32
+    };
+    return keyCodes[key] || 0;
+}
+
+function addTouchFeedback(direction, game = '2048') {
+    // Add visual feedback for touch interactions
+    const feedbackClass = `touch-feedback-${direction}`;
+    const gameBoard = game === '2048' ? 
+        document.getElementById('board2048') : 
+        document.getElementById('boardTetris');
+    
+    if (gameBoard) {
+        gameBoard.classList.add(feedbackClass);
+        setTimeout(() => {
+            gameBoard.classList.remove(feedbackClass);
+        }, 150);
+    }
+}
+
+// Detect mobile device
+function isMobileDevice() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+           (navigator.maxTouchPoints && navigator.maxTouchPoints > 2 && /MacIntel/.test(navigator.platform));
+}
+
+// Show/hide touch controls based on device
+function toggleTouchControls() {
+    const touchControls = document.querySelectorAll('.touch-controls');
+    const isMobile = isMobileDevice();
+    
+    touchControls.forEach(control => {
+        if (isMobile) {
+            control.style.display = 'flex';
+        } else {
+            control.style.display = 'none';
+        }
+    });
+}
+
+// Auto-detect and show touch controls
+window.addEventListener('load', function() {
+    toggleTouchControls();
+});
+
+// Handle orientation changes
+window.addEventListener('orientationchange', function() {
+    setTimeout(toggleTouchControls, 100);
+});
+
+// Handle window resize
+window.addEventListener('resize', function() {
+    toggleTouchControls();
+});
+
+// Prevent zoom on double tap for game elements
+document.addEventListener('touchend', function(e) {
+    if (e.target.closest('.game-board, .touch-btn, .touch-btn-tetris')) {
+        e.preventDefault();
+    }
+});
+
+// Add haptic feedback if available
+function addHapticFeedback() {
+    if (navigator.vibrate) {
+        navigator.vibrate(50); // Short vibration
+    }
+}
+
+// Enhanced touch button handlers with haptic feedback
+document.addEventListener('click', function(e) {
+    if (e.target.matches('.touch-btn, .touch-btn-tetris')) {
+        addHapticFeedback();
+    }
+});
+
+// Export functions for integration with existing game logic
+window.mobileGameControls = {
+    handle2048Move,
+    handleTetrisMove,
+    handleTetrisAction,
+    toggleTouchControls,
+    isMobileDevice
+};
+        
     </script>
 </body>
 </html>
