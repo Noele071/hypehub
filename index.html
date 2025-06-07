@@ -1878,19 +1878,13 @@ function initializeMobileControls() {
 }
 
 function addTouchControlsToGames() {
-    // Add 2048 touch controls
+    // Add 2048 touch controls - Only swipe indicator, no buttons
     const game2048 = document.getElementById('game2048');
     if (game2048) {
         const touchControls2048 = `
             <div class="touch-controls" id="touchControls2048">
-                <div class="touch-controls-2048">
-                    <button class="touch-btn touch-btn-up" data-direction="up">↑</button>
-                    <button class="touch-btn touch-btn-left" data-direction="left">←</button>
-                    <button class="touch-btn touch-btn-down" data-direction="down">↓</button>
-                    <button class="touch-btn touch-btn-right" data-direction="right">→</button>
-                </div>
                 <div class="swipe-indicator">
-                    💡 Swipe on the game board or use buttons above
+                    💡 Swipe on the game board to move tiles
                 </div>
             </div>
         `;
@@ -1992,13 +1986,8 @@ function addSwipeHandler(element, swipeCallback) {
 }
 
 function addTouchButtonHandlers() {
-    // 2048 touch button handlers
+    // Only Tetris touch button handlers (2048 uses swipe only)
     document.addEventListener('click', function(e) {
-        if (e.target.matches('.touch-btn[data-direction]')) {
-            const direction = e.target.getAttribute('data-direction');
-            handle2048Move(direction);
-        }
-        
         if (e.target.matches('.touch-btn-tetris[data-direction]')) {
             const direction = e.target.getAttribute('data-direction');
             handleTetrisMove(direction);
@@ -2010,15 +1999,15 @@ function addTouchButtonHandlers() {
         }
     });
     
-    // Add touch feedback
+    // Add touch feedback (only for Tetris buttons now)
     document.addEventListener('touchstart', function(e) {
-        if (e.target.matches('.touch-btn, .touch-btn-tetris')) {
+        if (e.target.matches('.touch-btn-tetris')) {
             e.target.style.transform = 'scale(0.9)';
         }
     });
     
     document.addEventListener('touchend', function(e) {
-        if (e.target.matches('.touch-btn, .touch-btn-tetris')) {
+        if (e.target.matches('.touch-btn-tetris')) {
             setTimeout(() => {
                 e.target.style.transform = '';
             }, 100);
@@ -2195,9 +2184,9 @@ function addHapticFeedback() {
     }
 }
 
-// Enhanced touch button handlers with haptic feedback
+// Enhanced touch button handlers with haptic feedback (Tetris only)
 document.addEventListener('click', function(e) {
-    if (e.target.matches('.touch-btn, .touch-btn-tetris')) {
+    if (e.target.matches('.touch-btn-tetris')) {
         addHapticFeedback();
     }
 });
