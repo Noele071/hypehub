@@ -491,63 +491,7 @@ body {
     border-radius: 12px;
 }
 
-/* 2048 Touch Controls */
-.touch-controls-2048 {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-    width: 180px;
-    height: 180px;
-}
-
-.touch-btn {
-    background: rgba(59, 130, 246, 0.2);
-    border: 2px solid rgba(59, 130, 246, 0.4);
-    border-radius: 12px;
-    color: #3b82f6;
-    font-size: 20px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    user-select: none;
-    touch-action: manipulation;
-    min-height: 50px;
-}
-
-.touch-btn:hover,
-.touch-btn:active {
-    background: rgba(59, 130, 246, 0.3);
-    border-color: rgba(59, 130, 246, 0.6);
-    transform: scale(0.95);
-}
-
-.touch-btn:active {
-    background: rgba(59, 130, 246, 0.4);
-}
-
-/* Directional buttons positioning */
-.touch-btn-up {
-    grid-column: 2;
-    grid-row: 1;
-}
-
-.touch-btn-left {
-    grid-column: 1;
-    grid-row: 2;
-}
-
-.touch-btn-down {
-    grid-column: 2;
-    grid-row: 3;
-}
-
-.touch-btn-right {
-    grid-column: 3;
-    grid-row: 2;
-}
+/* 2048 Touch Controls - Removed directional buttons */
 
 /* Tetris Touch Controls */
 .touch-controls-tetris {
@@ -662,10 +606,13 @@ body {
         height: 480px;
     }
     
-    /* Make touch buttons larger on small screens */
+    /* Remove arrow buttons sizing for mobile */
+    .touch-controls-2048 {
+        display: none;
+    }
+    
     .touch-btn {
-        min-height: 55px;
-        font-size: 22px;
+        display: none;
     }
     
     .touch-btn-tetris {
@@ -696,13 +643,11 @@ body {
     }
     
     .touch-controls-2048 {
-        width: 160px;
-        height: 160px;
+        display: none;
     }
     
     .touch-btn {
-        min-height: 50px;
-        font-size: 18px;
+        display: none;
     }
     
     .tetris-controls-row {
@@ -717,54 +662,6 @@ body {
     .tetris-action-controls {
         order: 1;
         justify-content: center;
-    }
-}
-        
-/* Responsive Design */
-@media (max-width: 768px) {
-    .container {
-        padding: 16px;
-    }
-    
-    .main-content {
-        grid-template-columns: 1fr;
-    }
-    
-    .header h1 {
-        font-size: 2rem;
-    }
-    
-    .game-options {
-        grid-template-columns: 1fr;
-    }
-    
-    .auth-section, .game-selection {
-        padding: 24px;
-    }
-    
-    .board-2048 {
-        width: 260px;
-        height: 260px;
-    }
-    
-    .board-tetris {
-        width: 220px;
-        height: 440px;
-    }
-}
-
-@media (max-width: 480px) {
-    .auth-tabs {
-        flex-direction: column;
-        gap: 8px;
-    }
-    
-    .tab-btn {
-        padding: 12px;
-    }
-    
-    .input-field {
-        max-width: 100%;
     }
 }
     </style>
