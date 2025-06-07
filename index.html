@@ -25,6 +25,74 @@ body {
     padding: 24px;
 }
 
+                /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 3rem 0 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            text-align: center;
+            color: #888;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: #888;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #00d4ff;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .twitter-feed {
+                grid-template-columns: 1fr;
+            }
+            
+            .telegram-features {
+                grid-template-columns: 1fr;
+            }
+            
+            .telegram-icon {
+                font-size: 6rem;
+            }
+            
+            .telegram-cta h3 {
+                font-size: 2rem;
+            }
+            
+            .telegram-cta p {
+                font-size: 1rem;
+            }
+        }
+
 /* Header Styles */
 .header {
     text-align: center;
@@ -2202,4 +2270,16 @@ window.mobileGameControls = {
         
     </script>
 </body>
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="https://t.me/hypegamehub">Telegram</a>
+                    <a href="https://x.com/hypegamehub">Twitter</a>
+                </div>
+                <p>&copy; 2025 GAMEHUB</p>
+                <p style="margin-top: 0.5rem; font-size: 0.9rem;">Play to win. Climb. Earn.</p>
+            </div>
+        </div>
+    </footer>
 </html>
